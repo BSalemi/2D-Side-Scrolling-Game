@@ -1,0 +1,23 @@
+* { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding:0; 
+}
+
+html, body { 
+    height: 100%; 
+    width: 100%; 
+}
+
+body {
+
+    align-content: center;
+    background-color: #202830;
+    color:#ffffff; 
+    display: grid;
+    justify-items: center;
+    font-size: 1.25em; 
+    min-height: 100%;
+    width: 100%;
+
+}
