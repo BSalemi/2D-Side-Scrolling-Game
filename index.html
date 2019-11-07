@@ -15,13 +15,19 @@
             html { height: 100%; width: 100%; }
 
             body {
+
+                align-content: center;
                 background-color: #202830;
                 color:#ffffff; 
+                display: grid;
+                justify-items: center;
                 font-size: 1.25em; 
                 min-height: 100%;
                 width: 100%;
 
             }
+
+            
 
         </style>
     </head>
@@ -36,6 +42,19 @@
         <script type ="text/javascript">
         
             const context = document.querySelector("canvas").getContext("2d");
+
+            const render = function(){
+
+                context.canvas.width = document.documentElement.clientWidth * 0.5;
+                context.canvas.height = document.documentElement.clientHeight * 0.5;
+
+                context.fillStyle = '#688248';
+                context.fillRect(0, 0, context.canvas.width, context.canvas.height)
+
+            }
+
+            window.addEventListener("resize", render)
+
         
         </script>
 
