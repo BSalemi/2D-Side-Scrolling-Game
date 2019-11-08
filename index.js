@@ -44,7 +44,7 @@ controller = {
 
 loop = function(){
 
-    if (controller.up && rectangle.jumping == false) {
+    if (controller.up && player.jumping == false) {
 
         player.y_velocity -= 20;
         player.jumping = true;
@@ -63,18 +63,60 @@ loop = function(){
         
     }
 
-}
+    player.y_velocity += 1.5;// gravity
+    player.x += player.x_velocity;
+    player.y += player.y_velocity;
+    player.x_velocity *= 0.9;// friction
+    player.y_velocity *= 0.9;// friction
 
-const render = function(){
 
-    context.canvas.width = document.documentElement.clientWidth * 0.5;
-    context.canvas.height = document.documentElement.clientHeight * 0.5;
+if (player.y > 180 - 16 - 32) {
 
+    player.jumping = false;
+    player.y = 180 - 16 - 32;
+    player.y_velocity = 0;
+
+  }
+
+  if (player.x < -32) {
+
+    player.x = 320;
+
+  } else if (player.x > 320) {// if player goes past right boundary
+
+    player.x = -32;
+
+  }
     context.fillStyle = '#688248';
-    context.fillRect(0, 0, context.canvas.width, context.canvas.height)
+    context.fillRect(0, 0, 320, 180);// x, y, width, height
+    context.fillStyle = "#ff0000";// hex for red
+    context.beginPath();
+    context.rect(player.x, player.y, player.width, player.height);
+    context.fill();
+    context.strokeStyle = "#202830";
+    context.lineWidth = 4;
+    context.beginPath();
+    context.moveTo(0, 164);
+    context.lineTo(320, 164);
+    context.stroke();
 
-}
+// call update when the browser is ready to draw again
+    window.requestAnimationFrame(loop);
 
-window.addEventListener("resize", render);
+};
 
-render();
+window.addEventListener("keydown", controller.keyListener)
+window.addEventListener("keyup", controller.keyListener);
+window.requestAnimationFrame(loop);
+
+
+// const render = function(){
+
+//     context.canvas.width = document.documentElement.clientWidth * 0.5;
+//     context.canvas.height = document.documentElement.clientHeight * 0.5;
+
+// }
+
+// window.addEventListener("resize", render);
+
+// render();
